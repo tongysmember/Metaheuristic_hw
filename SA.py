@@ -8,6 +8,10 @@ class Objective(object):
         return abs(x1**2 + x2**2 + x1*x2) + abs(np.sin(x1))+abs(np.cos(x2))
 
 class SA(object):
+    '''
+    Ref : CSDN:
+    https://blog.csdn.net/weixin_45666249/article/details/113761920?spm=1001.2101.3001.6650.2&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-2-113761920-blog-113173241.pcrelevantt0_20220926_downloadratepraise_v1&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-2-113761920-blog-113173241.pcrelevantt0_20220926_downloadratepraise_v1&utm_relevant_index=4
+    '''
     def __init__(self, func_objective):
         self.func_objective = func_objective
         print("Init_SA")
