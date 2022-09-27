@@ -1,12 +1,6 @@
 import numpy as np
 import math 
 
-class Objective(object):
-    ''' Objective Function Class '''
-    @staticmethod
-    def func_objective(x1, x2):
-        return abs(x1**2 + x2**2 + x1*x2) + abs(np.sin(x1))+abs(np.cos(x2))
-
 class SA(object):
     '''
     Ref : CSDN:
@@ -50,10 +44,3 @@ class SA(object):
             t = t + 1
             T = T0/(1+t)                                            # 快速模拟退火算法降温方式
             print("t:",t," T:",T,'x1:{0}, x2:{1}'.format(x1,x2))
-
-def main():
-    SA_Obj = SA(Objective.func_objective)
-    SA_Obj.proceed()
-
-if __name__ == '__main__':
-    main()
