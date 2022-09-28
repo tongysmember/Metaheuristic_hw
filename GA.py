@@ -4,7 +4,7 @@ from math import ceil, log, pow, pi, sin
 
 class GeneticAlogorithm:
     '''
-    Ref:https://codeantenna.com/a/Oz1GSmNXKX
+    Ref: https://blog.csdn.net/qq_26392583/article/details/53365188
     '''
     #约束变量
     a1, b1, a2, b2=3.0,12.1,4.1,5.8
