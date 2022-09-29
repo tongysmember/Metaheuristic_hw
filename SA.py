@@ -8,20 +8,22 @@ class SA(object):
     '''
     def __init__(self, func_objective):
         self.func_objective = func_objective
+        self.list_point = list()
         print("Init_SA")
 
     def proceed(self):
         # 模拟退火模型构建
-        T  = 10000                                # 温度
+        T  = 1000                                # 温度
         T0 = T                                      # 初始温度
         Tmin = 0                                    # 最小温度
-        Tmin = 0.1                                  # 最小温度
+        Tmin = 0.5                                  # 最小温度
         t = 0                                       # 时间
         k = 50                                      # 每个温度的迭代次数
         upper_bound = 500
         lower_bound = -500
         x1 = np.random.uniform(low=lower_bound,high=upper_bound)       # 随机化初始值
         x2 = np.random.uniform(low=lower_bound,high=upper_bound)       # 随机化初始值
+        self.list_point.append([x1, x2])
         y = 0                                       # y初始值
         step = 5
 
@@ -44,3 +46,4 @@ class SA(object):
             t = t + 1
             T = T0/(1+t)                                            # 快速模拟退火算法降温方式
             print("t:",t," T:",T,'x1:{0}, x2:{1}'.format(x1,x2))
+            self.list_point.append([x1, x2])
