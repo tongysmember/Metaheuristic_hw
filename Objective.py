@@ -16,7 +16,7 @@ class Objective(object):
 
     @staticmethod
     def func_objective_q8(x1, x2):
-        return 100*(x2 - x1**3) + (1 - x1)**2
+        return 100*((x2 - x1**3)**2) + (1 - x1)**2
 
     @staticmethod
     def func_objective_q13(x1, x2):
