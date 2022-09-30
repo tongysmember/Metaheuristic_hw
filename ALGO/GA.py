@@ -99,10 +99,11 @@ class GA(object):
         pop = np.random.randint(2, size=(self.POP_SIZE, self.DNA_SIZE*2)) 
         for _ in range(self.N_GENERATIONS):
             x,y = self.translateDNA(pop)
-            pop = np.array(self.crossover_and_mutation(pop, self.CROSSOVER_RATE))
             fitness = self.get_fitness(pop)
-            self.print_info(pop)
             pop = self.select(pop, fitness) 
+            pop = np.array(self.crossover_and_mutation(pop, self.CROSSOVER_RATE))
+            self.print_info(pop)
+            
 
 if __name__ == "__main__":
     GA = GA(-500, 500, 5000, Objective.func_objective_q2)
