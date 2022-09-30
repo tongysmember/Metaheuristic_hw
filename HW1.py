@@ -7,15 +7,17 @@ from GRAPH import Objective_Graph
 
 def main():
 
-    SA_Obj = SA(Objective.func_objective_q2)
+    func_objctive = Objective.func_objective_q2
+    
+    SA_Obj = SA(func_objctive)
     SA_Obj.proceed()
     
     #GA = GeneAlgo()
     #GA.proceed()
 
-    #graph = Objective_Graph(500,.1)
+    graph = Objective_Graph(500,.1)
     #graph.Draw_graph(Objective.func_objective_q2, list(SA_Obj.list_point)[::int(len(SA_Obj.list_point)/1000)])
-    #graph.Draw_graph(Objective.func_objective_q2, list(SA_Obj.list_point))
+    graph.Draw_graph(Objective.func_objective_q2, list(SA_Obj.list_point))
 
 if __name__ == '__main__':
     main()

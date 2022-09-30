@@ -22,18 +22,18 @@ class SA(object):
         '''
         Process
         '''
-        x1 = np.random.uniform(low=self.lower_bound,high=self.upper_bound)       # 随机化初始值
-        x2 = np.random.uniform(low=self.lower_bound,high=self.upper_bound)       # 随机化初始值
+        x1 = np.random.uniform(low=self.lower_bound,high=self.upper_bound)       # Random Set Init x1, x2
+        x2 = np.random.uniform(low=self.lower_bound,high=self.upper_bound)
         self.list_point.append([x1, x2])
-        y = 0                                       # y初始值
-        step = 5
+        y = 0                                                                    # declare y value
+        step = 5                                                                 # 每次前進位移距離 
 
         while self.Temprate_now > self.Temprate_min:
             for _ in range(self.k):
-                y = self.func_objective(x1,x2)                                  # 目标函数
-                x1New = x1 + np.random.uniform(low=-1*step,high=+1*step)   # 更新xNew
-                x2New = x2 + np.random.uniform(low=-1*step,high=+1*step)   # 更新xNew
-                yNew = self.func_objective(x1New, x2New)							# 求出新状态值
+                y = self.func_objective(x1,x2)                                   # 目標涵式, 適應值
+                x1New = x1 + np.random.uniform(low=-1*step,high=+1*step)         # 更新 x1, x2
+                x2New = x2 + np.random.uniform(low=-1*step,high=+1*step)         
+                yNew = self.func_objective(x1New, x2New)						 # 計算更新後數值
                 if (x1New < self.upper_bound and x1New > self.lower_bound) and (x2New < self.upper_bound and x2New > self.lower_bound):							# 状态比较
                     if y > yNew:
                         x1 = x1New
