@@ -11,7 +11,7 @@ class SA(object):
         self.func_objective = func_objective
         self.list_point = list()
         print("Init_SA")
-        self.Temperature_now = 100
+        self.Temperature_now = 10
         self.Temperature_start = self.Temperature_now
         self.Temperature_min = .1
         self.time = 0
