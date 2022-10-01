@@ -30,7 +30,7 @@ def main():
     iteration_times = 10
     SA_Obj = SA(lower_bound, upper_bound, iteration_times, func_objctive, sa_update_step, repeat_value_range)
     SA_Obj.proceed()
-    #graph.Draw_graph_2D(func_objctive, list(SA_Obj.list_point))
+    graph.Draw_graph_2D(func_objctive, list(SA_Obj.list_point))
     graph.Draw_graph_3D(func_objctive, list(SA_Obj.list_point))
 
     ## Genetic Algorithm
