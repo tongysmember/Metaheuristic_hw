@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import cm
 import math
-from FUNC.Objective import Objective
+from Objective import Objective
 
 class Objective_Graph(object):
     '''
@@ -17,6 +17,21 @@ class Objective_Graph(object):
         self.step = step
         self.padding = 200
     
+    def Draw_graph_3D_Question(self, func_objective):
+        # Draw 3D axis plot
+        x = np.arange(-self.width, self.width, self.step)
+        y = np.arange(-self.width, self.width, self.step)
+        X, Y = np.meshgrid(x, y) 
+        Z = func_objective(X)
+        ax = plt.axes(projection='3d')
+        ax.plot_surface(X, Y, Z, cmap = cm.coolwarm)
+        ax.set_xlabel('x1')
+        ax.set_ylabel('x2')
+        ax.set_zlabel('z')
+        ax.set_box_aspect((1, 1, 0.5))
+        plt.title('M11015Q03_HW1_Q2_Plot_Surface')
+        plt.show()
+
     def Draw_graph_3D(self, func_objective, list_point:list):
 
         # Draw 3D axis plot
@@ -61,10 +76,23 @@ class Objective_Graph(object):
         plt.show()
 
 
+    def Draw_graph_2D_Question(self,lower_bound, upper_bound, func_objective, list_point:list):
+        x = np.linspace ( start = lower_bound    
+                        , stop = upper_bound     
+                        , num = (upper_bound-lower_bound)      
+                        )
+        y = func_objective(x)    # This is already vectorized, that is, y will be a vector!
+        plt.plot(x, y)
+        plt.show()
+
+
 def main():
-    graph = Objective_Graph(500,.1)
+    #graph = Objective_Graph(500,.1)
     #graph.Draw_graph(Objective.func_objective_q2,[[1,1],[100,100],[500,500]])
-    graph.Draw_graph_2D(Objective.func_objective_q2,[[1,1],[100,100],[500,500]])
+    #graph.Draw_graph_2D(Objective.func_objective_q2,[[1,1],[100,100],[500,500]])
+
+    graph = Objective_Graph(500,.1)
+    graph.Draw_graph_2D_Question(Objective.func_objective_hw2_q2, [])
 
 if __name__ == '__main__':
     main()
