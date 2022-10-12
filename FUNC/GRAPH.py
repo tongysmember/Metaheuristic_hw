@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import cm
 import math
-from Objective import Objective
+from FUNC.Objective import Objective
 
 class Objective_Graph(object):
     '''
@@ -83,6 +83,12 @@ class Objective_Graph(object):
                         )
         y = func_objective(x)    # This is already vectorized, that is, y will be a vector!
         plt.plot(x, y)
+        list_iter, list_fitness = list(), list()
+        for data in sum(list_point, []):
+            list_iter.append(data)
+            list_fitness.append(func_objective(data))
+        plt.scatter(list_iter,list_fitness, color = '#88c999')
+
         plt.show()
 
 

@@ -17,13 +17,15 @@ def main():
     graph = Objective_Graph(upper_bound,.1)
     repeat_value_range = 10
     #graph.Draw_graph_3D_Question(func_objctive)
-    repeat_value_range = 10
+    #repeat_value_range = 10
     iteration_times = 20000
     SA_Obj = SA(lower_bound, upper_bound, iteration_times, func_objctive, sa_update_step, repeat_value_range)
     SA_Obj.proceed()
 
-    graph.Draw_graph_3D(func_objctive, list(SA_Obj.list_point))
-
+    #graph.Draw_graph_3D(func_objctive, list(SA_Obj.list_point))
+    #graph.Draw_graph_2D_Question(func_objctive, list(SA_Obj.list_point))
+    graph.Draw_graph_2D_Question(lower_bound, upper_bound, func_objctive, list(SA_Obj.list_point))
+    print('End')
 if __name__ == '__main__':
     main()
     
