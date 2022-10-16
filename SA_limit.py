@@ -9,13 +9,13 @@ class SA(object):
     1. Course Material Ch2_Single_State_Algorithms.pdf => Page.33
     2. CSDN: https://blog.csdn.net/weixin_45666249/article/details/113761920?spm=1001.2101.3001.6650.2&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-2-113761920-blog-113173241.pcrelevantt0_20220926_downloadratepraise_v1&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-2-113761920-blog-113173241.pcrelevantt0_20220926_downloadratepraise_v1&utm_relevant_index=4
     '''
-    def __init__(self, lower_bound,  upper_bound, iteration_times, func_objective, update_step, repeat_value_range):
+    def __init__(self, lower_bound,  upper_bound, iteration_times, func_objective, update_step, dim:int=10):
         self.func_objective = func_objective
         self.list_point = list()
         print("Init_SA")
-        self.Temperature_now = 50
+        self.Temperature_now = 100
         self.Temperature_start = self.Temperature_now
-        self.Temperature_min = .5
+        self.Temperature_min = .1
         self.time = 0
         self.k = iteration_times                                     
         self.upper_bound = upper_bound
@@ -23,7 +23,7 @@ class SA(object):
         self.update_step = update_step
         self.fitness_repeat_times = 0
         self.fitness_repeat_times_limit = 10
-        self.repeat_value_range = repeat_value_range
+        self.dim = dim
         self.precision_level = 1e-6
 
     def proceed(self):
@@ -37,7 +37,7 @@ class SA(object):
 
         while self.Temperature_now > self.Temperature_min:
             for _ in range(self.k):
-                y = self.func_objective(x1, 50)                                   # 目標涵式, 適應值
+                y = self.func_objective(x1,self.dim)                                   # 目標涵式, 適應值
                 x1New = x1 + np.random.uniform(low=-1*self.update_step,high=+1*self.update_step)         # 更新 x1, x2
                 #x2New = x2 + np.random.uniform(low=-1*self.update_step,high=+1*self.update_step)         
                 yNew = self.func_objective(x1New)						 # 計算更新後數值
@@ -46,8 +46,8 @@ class SA(object):
                     if y > yNew:                                                 # 若亂數產生值高於目標值, 更新x1, x2 座標
                         x1 = x1New
                         #print(abs(yNew-y), yNew)
-                        if abs(yNew) <= 1.5:  
-                            self.update_step = 1e-7
+                        if abs(yNew) <= 1e-6:  
+                            self.update_step = 1e-6
                         if abs(yNew-y) <= self.precision_level:                 # precision_level
                             break
                     else:
@@ -65,9 +65,9 @@ def main():
     #print('haloWord')
     
     # 設定初始變數, 目標函式, 上下界資訊, 迭代次數
-    func_objctive = Objective.func_objective_q2
-    lower_bound, upper_bound = -500, 500
-    sa_update_step = 1e-2
+    func_objctive = Objective.func_objective_hw2_q11
+    lower_bound, upper_bound = -4, 5
+    sa_update_step = 1e-1
     #graph = Objective_Graph(upper_bound,.1)
     repeat_value_range = 10
     iteration_times = 20000
