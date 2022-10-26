@@ -9,7 +9,7 @@ class SA(object):
     1. Course Material Ch2_Single_State_Algorithms.pdf => Page.33
     2. CSDN: https://blog.csdn.net/weixin_45666249/article/details/113761920?spm=1001.2101.3001.6650.2&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-2-113761920-blog-113173241.pcrelevantt0_20220926_downloadratepraise_v1&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-2-113761920-blog-113173241.pcrelevantt0_20220926_downloadratepraise_v1&utm_relevant_index=4
     '''
-    def __init__(self, lower_bound,  upper_bound, iteration_times, func_objective, update_step, dim:int=10):
+    def __init__(self, lower_bound,  upper_bound, iteration_times, func_objective, update_step, dim:int=10, precision_level = 1e-6):
         self.func_objective = func_objective
         self.list_point = list()
         print("Init_SA")
@@ -24,7 +24,7 @@ class SA(object):
         self.fitness_repeat_times = 0
         self.fitness_repeat_times_limit = 10
         self.dim = dim
-        self.precision_level = 1e-6
+        self.precision_level = precision_level# 1e-6
 
     def proceed(self):
         '''
@@ -46,8 +46,8 @@ class SA(object):
                     if y > yNew:                                                 # 若亂數產生值高於目標值, 更新x1, x2 座標
                         x1 = x1New
                         #print(abs(yNew-y), yNew)
-                        if abs(yNew) <= 1e-6:  
-                            self.update_step = 1e-6
+                        if abs(yNew) <= self.precision_level:
+                            self.update_step = self.precision_level
                         if abs(yNew-y) <= self.precision_level:                 # precision_level
                             break
                     else:
