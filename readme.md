@@ -1,8 +1,8 @@
-# METAHEURISTIC_HOMEWORK_1
+# METAHEURISTIC_HOMEWORK_2
 - Studnet Number: M11015Q03
-- Question: No.2
-- Algorithm: SA, GA
-- Github URL: https://github.com/tongysmember/Metaheuristic_hw
-- Enable Command: Python3 HW1.py
+- Question: No.11
+- Algorithm: SA, GA, PSO
+- Github URL: https://github.com/tongysmember/Metaheuristic_hw/tree/homework2
+- Enable Command: Python3 HW2.py
 - Pesudo
 - Convergence
