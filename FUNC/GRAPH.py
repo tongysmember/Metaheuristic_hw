@@ -88,7 +88,35 @@ class Objective_Graph(object):
             list_iter.append(data)
             list_fitness.append(func_objective(data))
         plt.scatter(list_iter,list_fitness, color = '#88c999')
+        plt.show()
 
+    def Draw_graph_2D_hw2_Question(self,lower_bound, upper_bound, func_objective, list_point:list):
+        x = np.linspace ( start = lower_bound    
+                        , stop = upper_bound     
+                        , num = (upper_bound-lower_bound)      
+                        )
+        y = func_objective(x)    # This is already vectorized, that is, y will be a vector!
+        plt.plot(x, y)
+        list_iter, list_fitness = list(), list()
+        #for data in sum(list_point, []):
+        for data in list_point:
+            list_iter.append(data)
+            list_fitness.append(func_objective(data))
+        plt.scatter(list_iter,list_fitness, color = '#88c999')
+        plt.show()
+
+        def Draw_graph_2D_hw2_Convergence(self, func_objective, list_point:list):
+            print('2D')
+        fig = plt.figure(figsize = (10, 5))
+        iter, list_iter, list_fitness = 0, list(), list()
+        for data in list_point:
+            list_iter.append(iter)
+            list_fitness.append(func_objective(data[0]))
+            iter+=1
+        plt.plot(list_iter, list_fitness)
+        plt.title("Convergence Curve")
+        plt.xlabel('Iteration No.')
+        plt.ylabel('r. Fitness')
         plt.show()
 
 
