@@ -30,34 +30,35 @@ class SA(object):
         '''
         Process
         '''
-        x1 = np.random.uniform(low=self.lower_bound,high=self.upper_bound)       # Random Set Init x1, x2
+        x1 = np.random.uniform(low=self.lower_bound,high=self.upper_bound)              # Random Set Init x1, x2
         #x2 = np.random.uniform(low=self.lower_bound,high=self.upper_bound)
         self.list_point.append([x1])
-        y = 0                                                                    # declare y value                                               # 每次前進位移距離 
+        y = 0                                                                           # declare y value                                               # 每次前進位移距離 
 
         while self.Temperature_now > self.Temperature_min:
             for _ in range(self.k):
-                y = self.func_objective(x1,self.dim)                                   # 目標涵式, 適應值
+                y = self.func_objective(x1,self.dim)                                    # 目標涵式, 適應值
                 x1New = x1 + np.random.uniform(low=-1*self.update_step,high=+1*self.update_step)         # 更新 x1, x2
                 #x2New = x2 + np.random.uniform(low=-1*self.update_step,high=+1*self.update_step)         
-                yNew = self.func_objective(x1New)						 # 計算更新後數值
+                yNew = self.func_objective(x1New)						                # 計算更新後數值
 
-                if (x1New < self.upper_bound and x1New > self.lower_bound):  #確認產生值小於邊界							
-                    if y > yNew:                                                 # 若亂數產生值高於目標值, 更新x1, x2 座標
+                if (x1New < self.upper_bound and x1New > self.lower_bound):             #確認產生值小於邊界							
+                    if y > yNew:                                                        # 若亂數產生值高於目標值, 更新x1, x2 座標
                         x1 = x1New
                         #print(abs(yNew-y), yNew)
                         if abs(yNew) <= self.precision_level:
-                            self.update_step = self.precision_level
-                        if abs(yNew-y) <= self.precision_level:                 # precision_level
+                            #self.update_step = self.precision_level
+                            self.update_step = 1e-7
+                        if abs(yNew-y) <= self.precision_level:                         # precision_level
                             break
                     else:
-                        r = np.random.uniform(low=0,high=1)                      # 隨機產生亂數
-                        p = math.exp(-(yNew-y)/self.Temperature_now)                # 概率值
-                        if r < p:                                                # 若小於該機率則同樣更新
+                        r = np.random.uniform(low=0,high=1)                             # 隨機產生亂數
+                        p = math.exp(-(yNew-y)/self.Temperature_now)                    # 概率值
+                        if r < p:                                                       # 若小於該機率則同樣更新
                             x1 = x1New
 
-            self.time = self.time + 1                                            # 計算次數
-            self.Temperature_now = self.Temperature_start/(1+self.time)                # 降溫
+            self.time = self.time + 1                                                   # 計算次數
+            self.Temperature_now = self.Temperature_start/(1+self.time)                 # 降溫
             print("Times:",self.time," Temprate_now:",self.Temperature_now,'x : {0}'.format(x1))
             self.list_point.append([x1])
 

@@ -14,8 +14,8 @@ class GA(object):
     Genetic Algorithm
     '''
     def __init__(self,lower_bound,  upper_bound, N_GENERATIONS, func_objective, dim:int=10):
-        self.DNA_SIZE = 100
-        self.POP_SIZE = 100
+        self.DNA_SIZE = 10
+        self.POP_SIZE = 10
         self.CROSSOVER_RATE = 0.7
         self.MUTATION_RATE = 0.05
         self.N_GENERATIONS = N_GENERATIONS
@@ -25,7 +25,8 @@ class GA(object):
         self.F = func_objective
         self.list_point = list()
         self.best_fitness = sys.maxsize
-    
+        self.fitness_last = sys.maxsize
+        self.precision_level = 1e-6
     def get_fitness(self, pop): 
         '''
         二進制轉換十進制, 並產生 Fitness 數值
@@ -41,9 +42,6 @@ class GA(object):
         x_pop = pop[:,1::2]
         #y_pop = pop[:,::2] 
         x = x_pop.dot(2**np.arange(self.DNA_SIZE)[::-1])/float(2**self.DNA_SIZE-1)*(self.X_BOUND[1]-self.X_BOUND[0])+self.X_BOUND[0]
-        #y = y_pop.dot(2**np.arange(self.DNA_SIZE)[::-1])/float(2**self.DNA_SIZE-1)*(self.Y_BOUND[1]-self.Y_BOUND[0])+self.Y_BOUND[0]
-        
-        #return x,y
         return x
     
     def crossover_and_mutation(self, pop, CROSSOVER_RATE = 0.8):
@@ -82,9 +80,9 @@ class GA(object):
         '''
         fitness = self.get_fitness(pop)
         min_fitness_index = np.argmin(fitness)
-        #print("min_fitness:", fitness[min_fitness_index])
+        print("min_fitness:", fitness[min_fitness_index])
         x= self.translateDNA(pop)
-        #print("(x):", (x[min_fitness_index]))
+        print("(x):", (x[min_fitness_index]))
         if min(fitness) < self.best_fitness:
             self.best_fitness = min(fitness)
             self.list_point.append([x[min_fitness_index]])
@@ -102,9 +100,13 @@ class GA(object):
         for _ in range(self.N_GENERATIONS):
             x= self.translateDNA(pop)
             fitness = self.get_fitness(pop)
+            self.print_info(pop)
+            if abs(self.best_fitness-self.fitness_last) <= self.precision_level and (self.best_fitness <=1e-2):                
+                break
+            self.fitness_last = self.best_fitness
             pop = self.select(pop, fitness) 
             pop = np.array(self.crossover_and_mutation(pop, self.CROSSOVER_RATE))
-            self.print_info(pop)
+            
             
 
 if __name__ == "__main__":
